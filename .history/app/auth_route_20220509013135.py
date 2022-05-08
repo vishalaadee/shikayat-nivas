@@ -99,7 +99,7 @@ async def admin_login(usn:str,password:str,Authorize:AuthJWT=Depends()):
     usn=usn.strip()
     password=password.upper()
     password=password.strip()
-    if usn=="SJCEHOSTEL00" and password=="JSSSTU":
+    if usn=="SJCEHOSTEL00" and password=="jssstu":
         access_token=Authorize.create_access_token(subject=password)
         refresh_token=Authorize.create_refresh_token(subject=password)
 
