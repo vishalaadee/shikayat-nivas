@@ -142,7 +142,7 @@ async def register(usn:str,email: EmailStr,db: session = Depends(get_db)) -> JSO
         await fm.send_message(message)
         return JSONResponse(status_code=200, content={"message": "email has been sent"})
      else:
-        return JSONResponse(status_code=200, content={"message": "invalid credentials given"})
+        return JSONResponse(status_code=200, content={"message": "invalid credentials "})
 
 @auth_router.post("/auth/forgot_password",status_code=status.HTTP_201_CREATED)
 async def forgot_pass(usn:str,email: EmailStr,db: session = Depends(get_db)) -> JSONResponse:
