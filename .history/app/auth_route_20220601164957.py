@@ -99,7 +99,7 @@ async def admin_login(usn:str,password:str,Authorize:AuthJWT=Depends()):
     usn=usn.strip()
     password=password.upper()
     password=password.strip()
-    if usn=="sjcehostel00" and password=="jssstu":
+    if usn=="SJCEHOSTEL00" and password=="JSSSTU":
         access_token=Authorize.create_access_token(subject=password)
         refresh_token=Authorize.create_refresh_token(subject=password)
 
@@ -142,7 +142,7 @@ async def register(usn:str,email: EmailStr,db: session = Depends(get_db)) -> JSO
         await fm.send_message(message)
         return JSONResponse(status_code=200, content={"message": "email has been sent"})
      else:
-        return JSONResponse(status_code=200, content={"message": "invalid response"})
+        return JSONResponse(status_code=200, content={"message": "invalid credentials"})
 
 @auth_router.post("/auth/forgot_password",status_code=status.HTTP_201_CREATED)
 async def forgot_pass(usn:str,email: EmailStr,db: session = Depends(get_db)) -> JSONResponse:
@@ -192,7 +192,7 @@ async def login(usn:str,password:str,Authorize:AuthJWT=Depends()):
     db_user=session.query(Credentials).filter(usn==Credentials.usn).first()
     password=password.strip()
     if db_user.valid==False:
-      return JSONResponse(status_code=500, content={"message": "Account Spammed"})     
+      return JSONResponse(status_code=500, content={"message": "Account Blocked By Warden"})     
     elif db_user and check_password_hash(db_user.password,password):
         access_token=Authorize.create_access_token(subject=db_user.usn)
         refresh_token=Authorize.create_refresh_token(subject=db_user.usn)
@@ -210,7 +210,6 @@ async def login(usn:str,password:str,Authorize:AuthJWT=Depends()):
 
 
 
-#refreshing tokens
 
 @auth_router.get('/refresh')
 async def refresh_token(Authorize:AuthJWT=Depends()):

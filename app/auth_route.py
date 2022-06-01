@@ -210,7 +210,6 @@ async def login(usn:str,password:str,Authorize:AuthJWT=Depends()):
 
 
 
-#refreshing tokens
 
 @auth_router.get('/refresh')
 async def refresh_token(Authorize:AuthJWT=Depends()):
