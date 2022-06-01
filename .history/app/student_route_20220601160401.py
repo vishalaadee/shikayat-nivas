@@ -42,8 +42,8 @@ def get_db():
 async def view_user(usn:str,db:Session=Depends(get_db)):
     usn=usn.upper()
     usn=usn.strip()
-    dc=db.query(User).filter(User.usn==usn).all()
-    return dc[0]   
+    dc=db.query(User).filter(User.usn==usn).first()
+    return dc[0]    
 
 @itemrouter.post("/home/edit_user/{usn}",status_code=status.HTTP_201_CREATED)
 async def update_user(user:StudentModel,usn:str,db:Session=Depends(get_db)):
