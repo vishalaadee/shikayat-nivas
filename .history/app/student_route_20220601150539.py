@@ -83,7 +83,7 @@ async def complain_user(user:ComplainModel,usn:str,db:Session=Depends(get_db)):
     
     return {"message":"Complaint Registered"}
 
-@itemrouter.get("/home/status_complain/{usn}",status_code=status.HTTP_201_CREATED)
+@itemrouter.get("/home/status_complain/{usn}/{cid}",status_code=status.HTTP_201_CREATED)
 async def status_user(usn:str,db:Session=Depends(get_db)):
     dc=db.query(complains).all()
     if dc is None:

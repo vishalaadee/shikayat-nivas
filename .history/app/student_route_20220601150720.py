@@ -92,7 +92,7 @@ async def status_user(usn:str,db:Session=Depends(get_db)):
         )
     return dc[0]
 
-@itemrouter.get("/home/re_complain/{usn}/{cid}",status_code=status.HTTP_201_CREATED)
+@itemrouter.get("/home/re_complain/{usn}/{",status_code=status.HTTP_201_CREATED)
 async def re_complain_user(usn:str,cid:int,db:Session=Depends(get_db)):
     dc=db.query(complains).filter(complains.cid==cid).all()
     if dc is None:
