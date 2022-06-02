@@ -42,13 +42,17 @@ async def status_user(cid:int,status:int,db:Session=Depends(get_db)):
     return {"message":"Status updated"}    
 
 @admin_router.get("/home/status_complaint/",status_code=status.HTTP_201_CREATED)
-async def status_complaint(db:Session=Depends(get_db)):
-    dc=db.query(complains).all()
+async def status_complaint(status:int,db:Session=Depends(get_db)):
+    dc=db.query(complains).filter(complains.cid==cid).all()
     if dc is None:
         return HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
             detail="Complaint doesn't exists"
         )
-    return dc
+    
+    dc[0].status=status
+    db.commit()
+    return {"message":"Status updated"}    
+
 @admin_router.post("/home/block/{cid}",status_code=status.HTTP_201_CREATED)
 async def block_user(cid:int,db:Session=Depends(get_db)):
     dc=db.query(complains).filter(complains.cid==cid).all()

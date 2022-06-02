@@ -48,7 +48,7 @@ async def status_complaint(db:Session=Depends(get_db)):
         return HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
             detail="Complaint doesn't exists"
         )
-    return dc
+    return 
 @admin_router.post("/home/block/{cid}",status_code=status.HTTP_201_CREATED)
 async def block_user(cid:int,db:Session=Depends(get_db)):
     dc=db.query(complains).filter(complains.cid==cid).all()
