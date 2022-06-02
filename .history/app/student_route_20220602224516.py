@@ -114,7 +114,7 @@ async def re_complain_user(usn:str,cid:int,db:Session=Depends(get_db)):
 async def feedback_user(feedback:str,usn:str,cid:int,db:Session=Depends(get_db)):
     dc=db.query(complains).filter(complains.cid==cid).all()
     if dc is None:
-        return {"message":"Complaint doesn't exists"}
+        return 
     if dc[0].status==2:  
         dc[0].feedback=feedback
         db.commit()    
