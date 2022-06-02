@@ -125,6 +125,6 @@ async def feedback_user(feedback:str,usn:str,cid:int,db:Session=Depends(get_db))
 
 @itemrouter.get("/home/feedbacks",status_code=status.HTTP_201_CREATED)
 async def feedbacks(db:Session=Depends(get_db)):
-    dc=db.query(complains.feedback).all()
+    dc=db.query(complains).filter.all()
     return dc
 

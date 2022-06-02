@@ -123,8 +123,17 @@ async def feedback_user(feedback:str,usn:str,cid:int,db:Session=Depends(get_db))
         return HTTPException(status_code=status.HTTP_400_BAD_REQUEST)
    
 
-@itemrouter.get("/home/feedbacks",status_code=status.HTTP_201_CREATED)
-async def feedbacks(db:Session=Depends(get_db)):
-    dc=db.query(complains.feedback).all()
-    return dc
+@itemrouter.post("/home/feedback_complain/{usn}/{cid}",status_code=status.HTTP_201_CREATED)
+async def feedback_user(feedback:str,usn:str,cid:int,db:Session=Depends(get_db)):
+    dc=db.query(complains).filter(complains.cid==cid).all()
+    if dc is None:
+        return {"message":"Complaint doesn't exists"}
+    if dc[0].status==2:  
+        dc[0].feedback=feedback
+        db.commit()    
+        return {"message":"Feedback Registered"}
+    else:
+        return HTTPException(status_code=status.HTTP_400_BAD_REQUEST)
+   
+
 
