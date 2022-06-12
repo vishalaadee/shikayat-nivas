@@ -4,7 +4,6 @@ from fastapi.exceptions import HTTPException
 from fastapi.exceptions import HTTPException
 from fastapi import APIRouter,status,Depends
 import pytz
-import boto3
 import ast
 from datetime import datetime, timezone
 import json
@@ -38,7 +37,14 @@ def get_db():
         yield db
     finally:
         db.close()
-        
+
+@itemrouter.get("/home/view_user/{usn}",status_code=status.HTTP_201_CREATED)
+async def view_user(usn:str,db:Session=Depends(get_db)):
+    usn=usn.upper()
+    usn=usn.strip()
+    dc=db.query(User).filter(User.usn==usn).all()
+    return dc[0]   
+
 @itemrouter.post("/home/edit_user/{usn}",status_code=status.HTTP_201_CREATED)
 async def update_user(user:StudentModel,usn:str,db:Session=Depends(get_db)):
     usn=usn.upper()
@@ -66,13 +72,17 @@ async def update_user(user:StudentModel,usn:str,db:Session=Depends(get_db)):
 
 @itemrouter.post("/home/register_complain/{usn}",status_code=status.HTTP_201_CREATED)
 async def complain_user(user:ComplainModel,usn:str,db:Session=Depends(get_db)):
-
+    IST = pytz.timezone('Asia/Kolkata')
+    datetime_ist = datetime.now(IST)
+    cur_date_time = datetime_ist.strftime('%Y-%m-%d')
+    cur_date_time =datetime.strptime(cur_date_time,'%Y-%m-%d')
+        
     new_complain=complains(
         usn=usn.upper(),
         topic=user.topic,
         description=user.description,
         status=0,
-        date
+        date=cur_date_time
     ) 
     db.add(new_complain)
 
@@ -80,9 +90,9 @@ async def complain_user(user:ComplainModel,usn:str,db:Session=Depends(get_db)):
     
     return {"message":"Complaint Registered"}
 
-@itemrouter.get("/home/status_complain/{usn}/{cid}",status_code=status.HTTP_201_CREATED)
-async def status_user(usn:str,cid:int,db:Session=Depends(get_db)):
-    dc=db.query(complains).filter(complains.cid==cid).all()
+@itemrouter.get("/home/status_complain/{usn}",status_code=status.HTTP_201_CREATED)
+async def status_user(usn:str,db:Session=Depends(get_db)):
+    dc=db.query(complains).filter_by(compla).all()
     if dc is None:
         return HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
             detail="Complaint doesn't exists"
@@ -104,9 +114,7 @@ async def re_complain_user(usn:str,cid:int,db:Session=Depends(get_db)):
 async def feedback_user(feedback:str,usn:str,cid:int,db:Session=Depends(get_db)):
     dc=db.query(complains).filter(complains.cid==cid).all()
     if dc is None:
-        return HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Complaint doesn't exists"
-        )
+        return {"message":"Complaint doesn't exists"}
     if dc[0].status==2:  
         dc[0].feedback=feedback
         db.commit()    
@@ -115,5 +123,8 @@ async def feedback_user(feedback:str,usn:str,cid:int,db:Session=Depends(get_db))
         return HTTPException(status_code=status.HTTP_400_BAD_REQUEST)
    
 
-
+@itemrouter.get("/home/feedbacks",status_code=status.HTTP_201_CREATED)
+async def feedbacks(db:Session=Depends(get_db)):
+    dc=db.query(complains.feedback).all()
+    return dc
 
