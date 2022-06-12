@@ -92,7 +92,7 @@ async def complain_user(user:ComplainModel,usn:str,db:Session=Depends(get_db)):
 
 @itemrouter.get("/home/status_complain/{usn}",status_code=status.HTTP_201_CREATED)
 async def status_user(usn:str,db:Session=Depends(get_db)):
-    usn=usn.upper()
+    usn=usn.
     dc=db.query(complains).filter(complains.usn==usn).all()
     if dc is None:
         return HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
