@@ -66,7 +66,7 @@ def generate_password():
 
 conf = ConnectionConfig(
     MAIL_USERNAME = "placementsjce2022@gmail.com",
-    MAIL_PASSWORD = "pradeepsirbcvs123",
+    MAIL_PASSWORD = "hdrpsazaxupdkjxm",
     MAIL_FROM = "placementsjce2022@gmail.com",
     MAIL_PORT = 587,
     MAIL_SERVER = "smtp.gmail.com",

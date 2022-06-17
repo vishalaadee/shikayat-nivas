@@ -66,7 +66,7 @@ def generate_password():
 
 conf = ConnectionConfig(
     MAIL_USERNAME = "placementsjce2022@gmail.com",
-    MAIL_PASSWORD = "pradeepsirbcvs123",
+    MAIL_PASSWORD = "hdrpsazaxupdkjxm",
     MAIL_FROM = "placementsjce2022@gmail.com",
     MAIL_PORT = 587,
     MAIL_SERVER = "smtp.gmail.com",
@@ -142,7 +142,7 @@ async def register(usn:str,email: EmailStr,db: session = Depends(get_db)) -> JSO
         await fm.send_message(message)
         return JSONResponse(status_code=200, content={"message": "email has been sent"})
      else:
-        return JSONResponse(status_code=200, content={"message": "invalid credentials given"})
+        return JSONResponse(status_code=200, content={"message": "invalid credentials"})
 
 @auth_router.post("/auth/forgot_password",status_code=status.HTTP_201_CREATED)
 async def forgot_pass(usn:str,email: EmailStr,db: session = Depends(get_db)) -> JSONResponse:
@@ -210,7 +210,6 @@ async def login(usn:str,password:str,Authorize:AuthJWT=Depends()):
 
 
 
-#refreshing tokens
 
 @auth_router.get('/refresh')
 async def refresh_token(Authorize:AuthJWT=Depends()):
