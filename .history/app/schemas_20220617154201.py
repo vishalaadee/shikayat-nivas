@@ -16,21 +16,13 @@ class StudentModel(BaseModel):
     sem:int
     phone:str
     secondary_phone:str
-    class Config:
-        orm_mode=True
-
+    class config:
+        
 class ComplainModel(BaseModel):    
     topic:str
     description:str
     class Config:
         orm_mode=True
-
-class Model(BaseModel):    
-    topic:str
-    description:str
-    class Config:
-        orm_mode=True
-
 
 class EmailSchema(BaseModel):
    email: List[EmailStr]

@@ -9,15 +9,33 @@ class StudentModel(BaseModel):
     usn  : str
     name : str
     email: EmailStr
-    srn:str
+    srn:int
     block:str
-    room:str
+    room:int
     branch:str
     sem:int
     phone:str
     secondary_phone:str
     class Config:
         orm_mode= True
+        Schema_extra={
+            'example':{
+            'cname':'Fidelity',
+            'category':'TIER-1',
+            'package':'1000000.00',
+            'internship_stipend':'10000',
+            'deadline':'2020-02-01',
+            'date':'2020-01-01',
+            'ssc':'60.00',
+            'hsc':'60.00',
+            'ug':'7.00',
+            'pg':'7.00',
+            'branch':'CSE',
+            'backlogs':'0',
+            'gender':'M,F'
+                    }
+        }
+    
         
 class ComplainModel(BaseModel):    
     topic:str

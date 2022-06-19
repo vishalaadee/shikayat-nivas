@@ -9,15 +9,33 @@ class StudentModel(BaseModel):
     usn  : str
     name : str
     email: EmailStr
-    srn:str
+    srn:int
     block:str
-    room:str
+    room:int
     branch:str
     sem:int
     phone:str
     secondary_phone:str
     class Config:
         orm_mode= True
+        Schema_extra={
+            'example':{
+            'name':'01jst19',
+            'email':'sanjayhostel0@gmail.com',
+            'srn':'1000000',
+            'block':'L',
+            'room':'43',
+            'branch':'cs',
+            'sem':'60.00',
+            'phone':'60.00',
+            'secondary_phone':'7.00',
+            'pg':'7.00',
+            'branch':'CSE',
+            'backlogs':'0',
+            'gender':'M,F'
+                    }
+        }
+    
         
 class ComplainModel(BaseModel):    
     topic:str

@@ -17,18 +17,19 @@ class StudentModel(BaseModel):
     phone:str
     secondary_phone:str
     class Config:
-        orm_mode=True
-
+        orm_mode= True
+        Schema_extra={
+            'example':{
+            
+                    }
+        }
+    
+        
 class ComplainModel(BaseModel):    
-    u
-    cid:int
     topic:str
     description:str
-    feedback:str
-    status:int
     class Config:
         orm_mode=True
-
 
 class EmailSchema(BaseModel):
    email: List[EmailStr]

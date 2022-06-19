@@ -17,18 +17,31 @@ class StudentModel(BaseModel):
     phone:str
     secondary_phone:str
     class Config:
-        orm_mode=True
-
+        orm_mode= True
+        Schema_extra={
+            'example':{
+            'usn':'01jst19i',
+            'category':'TIER-1',
+            'package':'1000000.00',
+            'internship_stipend':'10000',
+            'deadline':'2020-02-01',
+            'date':'2020-01-01',
+            'ssc':'60.00',
+            'hsc':'60.00',
+            'ug':'7.00',
+            'pg':'7.00',
+            'branch':'CSE',
+            'backlogs':'0',
+            'gender':'M,F'
+                    }
+        }
+    
+        
 class ComplainModel(BaseModel):    
-    usn:str
-    cid:int
     topic:str
     description:str
-    feedback:str
-    status:int
     class Config:
         orm_mode=True
-
 
 class EmailSchema(BaseModel):
    email: List[EmailStr]

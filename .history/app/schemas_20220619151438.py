@@ -9,9 +9,9 @@ class StudentModel(BaseModel):
     usn  : str
     name : str
     email: EmailStr
-    srn:str
+    srn:int
     block:str
-    room:str
+    room:int
     branch:str
     sem:int
     phone:str

@@ -9,7 +9,7 @@ class StudentModel(BaseModel):
     usn  : str
     name : str
     email: EmailStr
-    srn:int
+    srn:str
     block:str
     room:int
     branch:str
@@ -17,20 +17,13 @@ class StudentModel(BaseModel):
     phone:str
     secondary_phone:str
     class Config:
-        orm_mode=True
-
+        orm_mode= True
+        
 class ComplainModel(BaseModel):    
     topic:str
     description:str
     class Config:
         orm_mode=True
-
-class ComplainModel(BaseModel):    
-    topic:str
-    description:str
-    class Config:
-        orm_mode=True
-
 
 class EmailSchema(BaseModel):
    email: List[EmailStr]

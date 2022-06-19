@@ -9,15 +9,15 @@ class StudentModel(BaseModel):
     usn  : str
     name : str
     email: EmailStr
-    srn:str
+    srn:int
     block:str
-    room:str
+    room:int
     branch:str
     sem:int
     phone:str
     secondary_phone:str
     class Config:
-        orm_mode= True
+        orm_    
         
 class ComplainModel(BaseModel):    
     topic:str

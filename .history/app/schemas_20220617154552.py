@@ -17,20 +17,31 @@ class StudentModel(BaseModel):
     phone:str
     secondary_phone:str
     class Config:
-        orm_mode=True
-
+        orm_mode= True
+        Schema_extra={
+            'example':{
+            'name':'01jst19',
+            'email':'sanjayhostel0@gmail.com',
+            'srn':'1000000',
+            'block':'L',
+            'room':'43',
+            'branch':'cs',
+            'ssc':'60.00',
+            'hsc':'60.00',
+            'ug':'7.00',
+            'pg':'7.00',
+            'branch':'CSE',
+            'backlogs':'0',
+            'gender':'M,F'
+                    }
+        }
+    
+        
 class ComplainModel(BaseModel):    
     topic:str
     description:str
     class Config:
         orm_mode=True
-
-class FeedbackModel(BaseModel):    
-    topic:str
-    description:str
-    class Config:
-        orm_mode=True
-
 
 class EmailSchema(BaseModel):
    email: List[EmailStr]
