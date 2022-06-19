@@ -11,11 +11,11 @@ class StudentModel(BaseModel):
     email: EmailStr
     name : str
     phone:str
-    room:str
-    secondary_phone:str
-    sem:int
-    srn:str   
+    
     usn  : str
+    srn:str
+    sem:int
+    secondary_phone:str
     class Config:
         orm_mode= True
         

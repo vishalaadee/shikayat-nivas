@@ -12,10 +12,10 @@ class StudentModel(BaseModel):
     name : str
     phone:str
     room:str
-    secondary_phone:str
-    sem:int
-    srn:str   
+    
     usn  : str
+    srn:str
+    sem:int
     class Config:
         orm_mode= True
         

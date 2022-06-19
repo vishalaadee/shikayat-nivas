@@ -14,7 +14,8 @@ class StudentModel(BaseModel):
     room:str
     secondary_phone:str
     sem:int
-    srn:str   
+    srn:str
+    
     usn  : str
     class Config:
         orm_mode= True

@@ -9,13 +9,14 @@ class StudentModel(BaseModel):
     block:str
     branch:str
     email: EmailStr
-    name : str
-    phone:str
-    room:str
-    secondary_phone:str
-    sem:int
-    srn:str   
+    
     usn  : str
+    name : str
+    srn:str
+    room:str
+    sem:int
+    phone:str
+    secondary_phone:str
     class Config:
         orm_mode= True
         
