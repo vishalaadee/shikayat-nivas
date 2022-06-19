@@ -50,9 +50,9 @@ async def status_complaint(db:Session=Depends(get_db)):
         )
     a={"details":[],"user":[]}
     for i in dc:
-        a["details"].append({"cid":i.cid,"usn":i.usn,"status":i.status,"feedback":i.feedback,"topic":i.topic,"date":i.date,"description":i.description})
-        user=db.query(User).filter(User.usn==i.usn).all()
-        a["user"].append({"usn":user[0].usn,"name":user[0].name,"email":user[0].email,"block":user[0].block,"room":user[0].room})
+        a["details"].append({"cid":i.cid,"complaint":i.complaint,"status":i.status})
+        
+        a["user"].append({"usn":i.usn,"name":i.name})
             
     return a
 @admin_router.post("/home/block/{cid}",status_code=status.HTTP_201_CREATED)

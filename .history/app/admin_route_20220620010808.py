@@ -48,11 +48,9 @@ async def status_complaint(db:Session=Depends(get_db)):
         return HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
             detail="Complaint doesn't exists"
         )
-    a={"details":[],"user":[]}
+    a={"details":[],"user":len(dc)}
     for i in dc:
-        a["details"].append({"cid":i.cid,"usn":i.usn,"status":i.status,"feedback":i.feedback,"topic":i.topic,"date":i.date,"description":i.description})
-        user=db.query(User).filter(User.usn==i.usn).all()
-        a["user"].append({"usn":user[0].usn,"name":user[0].name,"email":user[0].email,"block":user[0].block,"room":user[0].room})
+        a.append(i)
             
     return a
 @admin_router.post("/home/block/{cid}",status_code=status.HTTP_201_CREATED)
