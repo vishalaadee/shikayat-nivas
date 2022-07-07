@@ -1,5 +1,4 @@
 import email,io,ast,json
-from email import message
 from io import BytesIO
 from fastapi import File,UploadFile,Form,Body,Response,FastAPI, BackgroundTasks,APIRouter,status,Depends
 from fastapi.responses import StreamingResponse
@@ -110,10 +109,11 @@ async def admin_login(usn:str,password:str,Authorize:AuthJWT=Depends()):
         }
 
         return jsonable_encoder(response)
-    else:
-        return {"message":"Invalid Credentials"}
-        
 
+    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+        detail="Password"
+    )
+    
 @auth_router.post("/auth/register",status_code=status.HTTP_201_CREATED)
 async def register(usn:str,email: EmailStr,db: session = Depends(get_db)) -> JSONResponse:
      usn=usn.upper()

@@ -110,9 +110,8 @@ async def admin_login(usn:str,password:str,Authorize:AuthJWT=Depends()):
         }
 
         return jsonable_encoder(response)
-    else:
-        return {"message":"Invalid Credentials"}
-        
+
+    
 
 @auth_router.post("/auth/register",status_code=status.HTTP_201_CREATED)
 async def register(usn:str,email: EmailStr,db: session = Depends(get_db)) -> JSONResponse:
