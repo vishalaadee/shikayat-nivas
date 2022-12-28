@@ -4,5 +4,6 @@ Here students with their valid credentials can register complains related to hos
 look upon to every issue through admin side and status keeps on changing upon every progress.
 
               Live Website Link :
-https://shikayat-niwas.herokuapp.com/
+              
+              https://hostel-grievance.vercel.app/
 
